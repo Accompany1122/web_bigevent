@@ -58,7 +58,7 @@ $(function() {
                 // console.log(res.token);
                 localStorage.setItem('token',res.token);
                 // 跳转到后台主页
-                // location.href = '/index01.html/'
+                location.href = '/index01.html/'
             }
         })
     })
