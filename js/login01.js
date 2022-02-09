@@ -33,14 +33,33 @@ $(function() {
           username: $('#form_reg [name=username]').val(),
           password: $('#form_reg [name=password]').val()
         }
-        $.post('http://ajax.frontend.itheima.net/api/reguser', data, function(res) {
+        $.post('http://www.liulongbin.top:3007/api/reguser', data, function(res) {
           if (res.status !== 0) {
-            return layer.msg(res.message)
+            return layer.msg(res.message);
           }
-          console.log('注册成功');
        layer.msg('注册成功，请登录！')
           // 模拟人的点击行为
           $('#link_login').click()
+        })
+    })
+    // 表单登录事件
+    $('#form_login').on('submit', function(e) {
+        e.preventDefault();
+        $.ajax({
+            url:'http://www.liulongbin.top:3007/api/login',
+            method:'POST',
+            // 表单中的数据
+            data: $(this).serialize(),
+            success: function(res) {
+                if(res.status !== 0) {
+                    return layer.msg('登录失败！');
+                }
+                layer.msg('登录成功！');
+                // console.log(res.token);
+                localStorage.setItem('token',res.token);
+                // 跳转到后台主页
+                // location.href = '/index01.html/'
+            }
         })
     })
 })
